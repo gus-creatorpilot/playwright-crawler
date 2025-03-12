@@ -36,7 +36,12 @@ app.post('/', async (req, res) => {
     try {
         // Launch the Chromium browser with specific arguments
         browser = await chromium.launch({
-            args: ['--single-process']
+            headless: true,
+            args: [
+                '--single-process',
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+            ],
         });
         // Create a new browser page
         const page = await browser.newPage();
